@@ -7,7 +7,8 @@ Task 0: Drop the table INSTRUCTOR from the database in case it already exists, s
 
 DROP table Instructor;
 
-Task 1: Create the INSTRUCTOR table as defined above. Have the ins_id be the primary key, and ensure the lastname and firstname are not null.
+Task 1: Create the INSTRUCTOR table as defined above. Have the ins_id be the primary key,
+and ensure the lastname and firstname are not null.
 (Hint: ins_id is of type INTEGER, country of type CHAR(2), and rest of the fields VARCHAR)
 
 CREATE table Instructor (
