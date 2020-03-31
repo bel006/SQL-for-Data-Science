@@ -1,0 +1,30 @@
+drop table INSTRUCTOR;
+
+create table INSTRUCTOR (
+	ins_id integer PRIMARY KEY NOT NULL,
+	lastname char(2) NOT NULL,
+	firstname varchar(60) NOT NULL,
+	city varchar(60) NOT NULL
+);
+
+-- need to call line below to see results
+SELECT * from INSTRUCTOR;
+
+INSERT into INSTRUCTOR(ins_id,lastname,firstname,City)
+values ('1','Ah','Rav','Toronto');
+
+INSERT into INSTRUCTOR (ins_id,lastname,firstname,City)
+
+values ('2','Ch','Raul','Toronto'), ('3','Va','Hima','Quebec');
+
+SELECT * from INSTRUCTOR;
+
+SELECT * from INSTRUCTOR WHERE City = 'Toronto';
+
+UPDATE INSTRUCTOR SET CITY = 'Markham' WHERE lastname = 'Ah';
+
+SELECT * from INSTRUCTOR;
+
+DELETE from INSTRUCTOR WHERE firstname = 'Raul';
+
+SELECT * from INSTRUCTOR;
