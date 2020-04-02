@@ -1,0 +1,75 @@
+DROP table Petsale;
+
+CREATE table Petsale (
+	ID INTEGER PRIMARY KEY NOT NULL,
+	Animal VARCHAR(20),
+	Quantity INTEGER,
+	Saleprice DECIMAL(6,2),
+	Saledate DATE
+);
+
+INSERT INTO Petsale VALUES
+	(1,'Cat',9,450.09,'2018-05-29'),
+	(2,'Dog',3,666.66,'2018-06-01'),
+	(3,'Dog',1,100.00,'2018-06-04'),
+	(4,'Parrot',2,50.00,'2018-06-04'),
+	(5,'Dog',1,75.75,'2018-06-10'),
+	(6,'Hamster',6,60.60,'2018-06-11'),
+	(7,'Cat',1,44.44,'2018-06-11'),
+	(8,'Goldfish',24,48.48,'2018-06-14'),
+	(9,'Dog',2,222.22,'2018-06-15');
+
+SELECT SUM(Saleprice)
+FROM Petsale;
+
+-- The total saleprice for this pet sale is $1,718.24.
+
+SELECT SUM(Saleprice) AS Sum_of_Saleprice
+FROM Petsale;
+
+-- Assigning the name for the sum of saleprice as Sum_of_Saleprice.
+
+SELECT MAX(Quantity)
+FROM Petsale;
+
+-- The highest number of pets purchased for one transaction was 24.
+
+SELECT MIN(ID) FROM Petsale
+WHERE Animal = 'Dog';
+
+-- Returns the lowest ID number for dog.
+
+SELECT ROUND(Saleprice) FROM Petsale;
+
+-- Rounds all saleprice down to the nearest whole number.
+
+SELECT UCASE(Animal) FROM Petsale;
+
+-- Returns the list of animals in upper case.
+
+SELECT * FROM Petsale
+WHERE LCASE(Animal) = 'cat';
+
+-- Returns the rows where the animal is a cat, regardless of upper/lower case formatting.
+
+SELECT DISTINCT(UCASE(Animal)) FROM Petsale;
+
+-- Returns a list of animals in upper case; no repetition.
+
+SELECT DAY(Saledate) FROM Petsale
+WHERE Animal = 'Cat';
+
+-- Returns the first day when a cat was sold.
+
+SELECT COUNT(*) FROM Petsale
+WHERE MONTH(Saledate) = '05';
+
+-- Returns the number of rows where the purchase was made in May.
+
+SELECT (Saledate + 3 DAYS) FROM Petsale;
+
+-- Returns the date three days after the original date transaction.
+
+SELECT (CURRENT_DATE - Saledate) FROM Petsale;
+
+-- Returns the number of days since the original sale date.
