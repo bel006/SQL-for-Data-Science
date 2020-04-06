@@ -125,4 +125,5 @@ SELECT	E.Emp_ID,
 FROM Employees E, Departments D
 WHERE E.Dep_ID = D.Dept_ID_Dep;
 
--- Returns the employee ID and department name only where department ID from Employees table is equal to department ID in the Departments table.
+-- Returns the employee ID and department name only where department ID from Employees
+table is equal to department ID in the Departments table.
