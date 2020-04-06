@@ -1,17 +1,20 @@
 LAB: Practice Sub-Queries and Working with Multiple Tables
 
-Now lets practice sub-queries and working with multiple tables. Use the EMPLOYEES and DEPARTMENTS tables created previously and execute the queries in the last two lessons.
+Now lets practice sub-queries and working with multiple tables. Use the EMPLOYEES and DEPARTMENTS
+tables created previously and execute the queries in the last two lessons.
 
 Part A: Sub-Queries and Nested-Selects
 
-Query A1: Enter a failing (i.e. which gives an error) to retrieve all employees whose salary is greater than the average salary
+Query A1: Enter a failing (i.e. which gives an error) to retrieve all employees whose
+salary is greater than the average salary
 
 SELECT * FROM Employees
 WHERE Salary > AVG(Salary);
 
 -- Invalid use of the aggregate function AVG().
 
-Query A2: Enter a working query using a sub-select to retrieve all employees whose salary is greater than the average salary
+Query A2: Enter a working query using a sub-select to retrieve all employees whose
+salary is greater than the average salary
 
 SELECT	Emp_ID,
 	F_Name,
@@ -22,7 +25,8 @@ WHERE Salary < (SELECT AVG(Salary) FROM Employees);
 
 -- Returns a list of employees whose salary is less than the average salary.
 
-Query A3: Enter a failing query (i.e.  that gives an error) that retrieves all employees records and average salary in every row
+Query A3: Enter a failing query (i.e.  that gives an error) that retrieves all employees
+records and average salary in every row
 
 SELECT	Emp_ID,
 	Salary,
@@ -42,7 +46,8 @@ FROM Employees;
 
 Query A5: Enter a Table Expression that retrieves only the columns  with non-sensitive employee data
 
-SELECT * FROM (SELECT	Emp_ID,										F_Name,
+SELECT * FROM (SELECT	Emp_ID,
+			F_Name,
 			L_Name,
 			Dep_ID
 			FROM Employees)
@@ -74,10 +79,12 @@ Query B3: Retrieve the department ID and name for employees who earn more than $
 SELECT	Dept_ID_Dep,
 	Dep_Name
 FROM Departments
-WHERE Dept_ID_Dep IN	(SELECT Dep_ID									FROM Employees
+WHERE Dept_ID_Dep IN	(SELECT Dep_ID
+			FROM Employees
 			WHERE Salary > 70000);
 
--- Returns the department ID and department name based on the Employees table whose employee has a salary greater than 70000.
+-- Returns the department ID and department name based on the Employees table whose
+employee has a salary greater than 70000.
 
 Query B4: Specify 2 tables in the FROM clause
 
@@ -108,7 +115,8 @@ SELECT	Emp_ID,
 FROM Employees E, Departments D
 WHERE E.Dep_ID = D.Dept_ID_Dep;
 
--- Returns the employee ID and department name only where department ID from Employees table is equal to department ID in the Departments table.
+-- Returns the employee ID and department name only where department ID from Employees
+table is equal to department ID in the Departments table.
 
 Query B8: In the above query specify the fully qualified column names with aliases in the SELECT clause
 
