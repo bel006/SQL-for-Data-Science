@@ -1,0 +1,120 @@
+LAB: Practice Sub-Queries and Working with Multiple Tables
+
+Now lets practice sub-queries and working with multiple tables. Use the EMPLOYEES and DEPARTMENTS tables created previously and execute the queries in the last two lessons.
+
+Part A: Sub-Queries and Nested-Selects
+
+Query A1: Enter a failing (i.e. which gives an error) to retrieve all employees whose salary is greater than the average salary
+
+SELECT * FROM Employees
+WHERE Salary > AVG(Salary);
+
+-- Invalid use of the aggregate function AVG().
+
+Query A2: Enter a working query using a sub-select to retrieve all employees whose salary is greater than the average salary
+
+SELECT	Emp_ID,
+	F_Name,
+	L_Name,
+	Salary
+FROM Employees
+WHERE Salary < (SELECT AVG(Salary) FROM Employees);
+
+-- Returns a list of employees whose salary is less than the average salary.
+
+Query A3: Enter a failing query (i.e.  that gives an error) that retrieves all employees records and average salary in every row
+
+SELECT	Emp_ID,
+	Salary,
+	AVG(Salary) AS Avg_Salary FROM Employees;
+			  
+-- No by-clause is specified.
+
+Query A4: Enter a Column Expression that retrieves all employees records and average salary in every row
+
+SELECT	Emp_ID,
+	Salary,
+	(SELECT AVG(Salary)
+	FROM Employees) AS Avg_Salary
+FROM Employees;
+
+-- Returns all employee IDs, their salaries, and a new column called Avg_Salary with the average salary.
+
+Query A5: Enter a Table Expression that retrieves only the columns  with non-sensitive employee data
+
+SELECT * FROM (SELECT	Emp_ID,										F_Name,
+			L_Name,
+			Dep_ID
+			FROM Employees)
+AS Emp4all;
+
+-- Returns non-sensitive employee data into a new table called Emp4all.
+
+Part B: Accessing Multiple Tables with Sub-Queries
+
+Query B1: Retrieve only the EMPLOYEES records that correspond to departments in the DEPARTMENTS table
+
+SELECT * FROM Employees
+WHERE Dep_ID IN (SELECT Dept_ID_Dep
+		FROM Departments);
+
+-- Returns a list of employees whose department ID is found in the Departments table.
+
+Query B2: Retrieve only the list of employees from location L0002
+
+SELECT * FROM Employees
+WHERE Dep_ID IN (SELECT Dept_ID_Dep
+		FROM Departments
+		WHERE Loc_ID = 'L0002');
+
+-- Returns a list of employees who are located in L0002 as listed in the Departments table.
+
+Query B3: Retrieve the department ID and name for employees who earn more than $70,000
+
+SELECT	Dept_ID_Dep,
+	Dep_Name
+FROM Departments
+WHERE Dept_ID_Dep IN	(SELECT Dep_ID									FROM Employees
+			WHERE Salary > 70000);
+
+-- Returns the department ID and department name based on the Employees table whose employee has a salary greater than 70000.
+
+Query B4: Specify 2 tables in the FROM clause
+
+SELECT * FROM Employees, Departments;
+
+-- Combines the rows from the Employees table and the Departments table; total of 15 columns now.
+
+Accessing Multiple Tables with Implicit Joins
+
+Query B5: Retrieve only the EMPLOYEES records that correspond to departments in the DEPARTMENTS table
+
+SELECT * FROM Employees, Departments
+WHERE Employees.Dep_ID = Departments.Dept_ID_Dep;
+
+-- Returns a list of employees whose department ID is found in the Departments table.
+
+Query B6: Use shorter aliases for table names
+
+SELECT * FROM Employees E, Departments D
+WHERE E.Dep_ID = D.Dept_ID_Dep;
+
+-- Returns a list of employees whose department ID is found in the Departments table.
+
+Query B7: Retrieve only the Employee ID and Department name in the above query
+
+SELECT	Emp_ID,
+	Dep_Name
+FROM Employees E, Departments D
+WHERE E.Dep_ID = D.Dept_ID_Dep;
+
+-- Returns the employee ID and department name only where department ID from Employees table is equal to department ID in the Departments table.
+
+Query B8: In the above query specify the fully qualified column names with aliases in the SELECT clause
+
+SELECT	E.Emp_ID,
+	D.Dep_Name
+FROM Employees E, Departments D
+WHERE E.Dep_ID = D.Dept_ID_Dep;
+
+-- Returns the employee ID and department name only where department ID from Employees table is equal to department ID in the Departments table.
